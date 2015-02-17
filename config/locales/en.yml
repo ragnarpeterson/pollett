@@ -1,0 +1,14 @@
+en:
+  pollett:
+    mailer:
+      welcome:
+        subject: "Welcome!"
+        body: "Welcome aboard!"
+      reset:
+        subject: "Password Reset"
+        opening: "Someone recently requested a password change for your account. To reset your password, just follow this link:"
+        closing: "If you did not make this request, just ignore this email. Your password will remain unchanged."
+  activerecord:
+    attributes:
+      user:
+        password_digest: "Password"
