@@ -14,7 +14,7 @@ module Pollett
 
       def mount
         inject_into_file "config/routes.rb", after: "Rails.application.routes.draw do\n" do
-          "  mount Pollett::Engine => '/'\n\n"
+          "  mount Pollett::Engine => \"/\"\n\n"
         end
       end
 

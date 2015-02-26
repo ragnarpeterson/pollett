@@ -1,8 +1,8 @@
-# This migration comes from pollett (originally 20150205235320)
+# This migration comes from pollett (originally 20150226024506)
 class CreatePollettSessions < ActiveRecord::Migration
   def change
-    create_table :pollett_sessions do |t|
-      t.integer :user_id, null: false
+    create_table :pollett_sessions, id: :uuid, default: 'uuid_generate_v1()' do |t|
+      t.uuid :user_id, null: false
       t.string :token, null: false
       t.datetime :revoked_at
       t.datetime :accessed_at
