@@ -1,6 +1,6 @@
 class CreatePollettSessions < ActiveRecord::Migration
   def change
-    create_table :pollett_sessions, id: :uuid, default: 'uuid_generate_v1()' do |t|
+    create_table :pollett_sessions, id: :uuid, default: "uuid_generate_v1()" do |t|
       t.uuid :user_id, null: false
       t.string :token, null: false
       t.datetime :revoked_at
