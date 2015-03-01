@@ -14,6 +14,7 @@ module Pollett
       end
     end
 
+    private
     def activate_session(session)
       session.access(request)
       self.current_session = session

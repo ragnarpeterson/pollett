@@ -1,6 +1,4 @@
 require "pollett/configuration"
-require "pollett/controller"
-require "pollett/user"
 require "pollett/engine"
 
 module Pollett
