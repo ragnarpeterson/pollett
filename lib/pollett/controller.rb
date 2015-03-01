@@ -7,6 +7,8 @@ module Pollett
     included do
       attr_accessor :current_session
 
+      before_filter :authenticate!
+
       rescue_from Pollett::Unauthorized do
         render_status(:unauthorized)
       end

@@ -4,7 +4,7 @@ require "pollett/services/password_resetter"
 
 module Pollett
   class SessionsController < ::ApplicationController
-    before_filter :authenticate!, only: [:show, :destroy]
+    skip_before_filter :authenticate!, only: [:create, :forgot]
 
     def show
       render_ok(current_session)
