@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "Sessions" do
   let!(:user) { create(:user, email: "john@example.com", password: "password") }
-  let!(:session) { create(:session, user: user) }
+  let!(:session) { create(:pollett_session, user: user) }
 
   describe "GET /sessions/current" do
     it_requires_authentication(:get, "/sessions/current")
