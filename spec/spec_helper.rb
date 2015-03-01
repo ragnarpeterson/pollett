@@ -1,22 +1,9 @@
-ENV["RAILS_ENV"] ||= "test"
-
-require File.expand_path("../dummy/config/environment.rb",  __FILE__)
-
-require "rspec/rails"
-require "factory_girl_rails"
-require "pollett/rspec"
-
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
-
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods
-  config.include EmailHelper
+  config.expect_with :rspec do |expectations|
+    expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  end
 
-  config.infer_spec_type_from_file_location!
-  config.mock_with :rspec
-  config.use_transactional_fixtures = true
-  config.infer_base_class_for_anonymous_controllers = false
-  config.order = :random
-
-  config.before(:each) { reset_email }
+  config.mock_with :rspec do |mocks|
+    mocks.verify_partial_doubles = true
+  end
 end

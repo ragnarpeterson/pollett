@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 describe "Sessions" do
   let!(:user) { create(:user, email: "john@example.com", password: "password") }
