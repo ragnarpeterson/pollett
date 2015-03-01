@@ -1,5 +1,3 @@
-require "active_model_serializers"
-
 module Pollett
   class SessionSerializer < ActiveModel::Serializer
     attributes :id,

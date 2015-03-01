@@ -1,3 +1,4 @@
+require "active_model_serializers"
 require "servitore"
 
 require "pollett/configuration"

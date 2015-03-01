@@ -1,5 +1,3 @@
-require "pollett/session_serializer"
-
 module Pollett
   class SessionsController < ::ApplicationController
     skip_before_filter :authenticate!, only: [:create, :forgot]
