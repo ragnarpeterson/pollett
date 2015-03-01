@@ -23,6 +23,10 @@ module Pollett
           keys.each { |k| expect(hash).to have_key(k) }
         end
 
+        def a_head(path, session, params = nil)
+          authenticated_request(:head, path, session, params)
+        end
+
         def a_get(path, session, params = nil)
           authenticated_request(:get, path, session, params)
         end
