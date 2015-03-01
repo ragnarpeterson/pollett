@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150226030317) do
+ActiveRecord::Schema.define(version: 20150226030316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,4 +45,5 @@ ActiveRecord::Schema.define(version: 20150226030317) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_token"], name: "index_users_on_reset_token", unique: true, using: :btree
 
+  add_foreign_key "pollett_sessions", "users", on_delete: :cascade
 end

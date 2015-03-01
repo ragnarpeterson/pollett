@@ -8,10 +8,6 @@ module Pollett
 
       source_root File.expand_path("../templates", __FILE__)
 
-      def install_migrations
-        Dir.chdir(Rails.root) { `rake pollett:install:migrations` }
-      end
-
       def mount
         inject_into_file "config/routes.rb", after: "Rails.application.routes.draw do\n" do
           "  mount Pollett::Engine => \"/\"\n\n"
@@ -44,6 +40,10 @@ module Pollett
         else
           copy_migration "create_users.rb"
         end
+      end
+
+      def install_migrations
+        Dir.chdir(Rails.root) { `rake pollett:install:migrations` }
       end
 
       private

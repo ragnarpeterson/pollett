@@ -1,7 +1,7 @@
 # This migration comes from pollett (originally 20150226024506)
 class CreatePollettSessions < ActiveRecord::Migration
   def change
-    create_table :pollett_sessions, id: :uuid, default: 'uuid_generate_v1()' do |t|
+    create_table :pollett_sessions, id: :uuid, default: "uuid_generate_v1()" do |t|
       t.uuid :user_id, null: false
       t.string :token, null: false
       t.datetime :revoked_at
@@ -11,6 +11,8 @@ class CreatePollettSessions < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_foreign_key :pollett_sessions, :users, on_delete: :cascade
 
     add_index :pollett_sessions, :user_id
     add_index :pollett_sessions, :token, unique: true

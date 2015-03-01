@@ -11,6 +11,8 @@ class CreatePollettSessions < ActiveRecord::Migration
       t.timestamps null: false
     end
 
+    add_foreign_key :pollett_sessions, :users, on_delete: :cascade
+
     add_index :pollett_sessions, :user_id
     add_index :pollett_sessions, :token, unique: true
     add_index :pollett_sessions, :accessed_at
