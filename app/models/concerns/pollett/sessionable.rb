@@ -25,7 +25,8 @@ module Pollett
     end
 
     def revoke!
-      update!(revoked_at: current_time_from_proper_timezone)
+      self.revoked_at ||= current_time_from_proper_timezone
+      save!
     end
 
     private
