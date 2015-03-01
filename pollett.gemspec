@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency "bcrypt"
   s.add_dependency "email_validator"
   s.add_dependency "pg"
+  s.add_dependency "servitore"
 
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "factory_girl_rails"

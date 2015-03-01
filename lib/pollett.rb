@@ -1,3 +1,5 @@
+require "servitore"
+
 require "pollett/configuration"
 require "pollett/engine"
 

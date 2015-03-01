@@ -1,6 +1,4 @@
 require "pollett/session_serializer"
-require "pollett/services/session_creator"
-require "pollett/services/password_resetter"
 
 module Pollett
   class SessionsController < ::ApplicationController
@@ -11,13 +9,13 @@ module Pollett
     end
 
     def create
-      record = Services::SessionCreator.perform(params)
+      record = CreateSession.call(params)
       activate_session(record)
       render_created(record)
     end
 
     def forgot
-      Services::PasswordResetter.perform(params)
+      ResetPassword.call(params)
       render_status(:accepted)
     end
 
