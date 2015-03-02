@@ -4,8 +4,11 @@ module Pollett
       module ClassMethods
         def it_requires_authentication(method, path)
           it "requires authentication" do
-            json_request(method, path)
-            expect_status(401)
+            begin
+              json_request(method, path)
+              expect_status(401)
+            rescue Pollett::Unauthorized
+            end
           end
         end
       end

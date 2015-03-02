@@ -19,20 +19,20 @@ describe "Sessions" do
     context "when session has been revoked" do
       before { session.revoke! }
 
-      it "responds with unauthorized" do
-        a_get("/sessions/current", session)
-
-        expect_status(401)
+      it "raises an unauthorized error" do
+        expect do
+          a_get("/sessions/current", session)
+        end.to raise_error(Pollett::Unauthorized)
       end
     end
 
     context "when session has timed out" do
       before { session.update!(accessed_at: 3.weeks.ago) }
 
-      it "responds with unauthorized" do
-        a_get("/sessions/current", session)
-
-        expect_status(401)
+      it "raises an unauthorized error" do
+        expect do
+          a_get("/sessions/current", session)
+        end.to raise_error(Pollett::Unauthorized)
       end
     end
   end
@@ -53,10 +53,10 @@ describe "Sessions" do
       context "with invalid credentials" do
         before { params[:password] = "wrong" }
 
-        it "responds with unauthorized" do
-          json_request(:post, "/sessions", params)
-
-          expect_status(401)
+        it "raises an unauthorized error" do
+          expect do
+            json_request(:post, "/sessions", params)
+          end.to raise_error(Pollett::Unauthorized)
         end
       end
     end
