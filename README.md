@@ -5,6 +5,8 @@ Token-based authentication for your Rails API.
 Pollett is a simple authentication library for your API-only Rails app. It treats sessions as a [first class domain concern]
 (https://github.com/blog/1661-modeling-your-app-s-user-session) and takes its inspiration from [Clearance](https://github.com/thoughtbot/clearance).
 
+Pollett currently requires Postgres and the use of UUID primary keys. This means you will need to have the `uuid-ossp` extension enabled before using Pollett.
+
 ## Install
 
 To get started, add Pollett to your `Gemfile`, `bundle install`, and run the
@@ -51,19 +53,21 @@ At minimum, you will need to configure `reset_url` so that the link will be corr
 
 ### Access Control
 
-Use the `authenticate!` filter to control access to controller actions.
+Pollett authentication is opt-out rather than opt-in. This means that if there is an action that does not require authentication, you will need to use a `skip_before_filter`:
 
 ```ruby
 class ArticlesController < ApplicationController
-  before_action :authenticate!
+  skip_before_filter :authenticate!, only: :safe_action
 
-  def index
-  	render json: current_user.articles
+  def safe_action
+  	# something that does not require authentication
   end
 end
 ```
 
 As you'd expect, `current_user` can be used from within controllers to access the authenticated user.
+
+When authentication fails, Pollett raises a `Pollett::Unauthorized` error. You should [rescue_from](http://guides.rubyonrails.org/action_controller_overview.html#rescue-from) this to customize what is rendered.
 
 ### Email
 Pollett is capable of sending two types of emails. In addition to the standard password reset email, it will send a welcome email upon registration unless `config.send_welcome_email` is set to `false`.
