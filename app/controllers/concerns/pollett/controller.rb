@@ -27,9 +27,5 @@ module Pollett
         raise Unauthorized
       end
     end
-
-    def render_status(status, opts = {})
-      render opts.merge({ status: status, json: { status: status } })
-    end
   end
 end

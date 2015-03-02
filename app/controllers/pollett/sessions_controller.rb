@@ -14,7 +14,7 @@ module Pollett
 
     def forgot
       ResetPassword.call(params)
-      render_status(:accepted)
+      render json: { status: :accepted }, status: :accepted
     end
 
     def destroy
