@@ -3,13 +3,13 @@ module Pollett
     skip_before_filter :authenticate!, only: [:create, :forgot]
 
     def show
-      render_ok(current_session)
+      render json: current_session, status: :ok
     end
 
     def create
       record = CreateSession.call(params)
       activate_session(record)
-      render_created(record)
+      render json: record, status: :created
     end
 
     def forgot
@@ -19,7 +19,7 @@ module Pollett
 
     def destroy
       current_session.revoke!
-      render_no_content
+      head :no_content
     end
   end
 end

@@ -35,17 +35,5 @@ module Pollett
     def render_status(status, opts = {})
       render opts.merge({ status: status, json: { status: status } })
     end
-
-    def render_created(record, opts = {})
-      render opts.merge(status: :created, json: record)
-    end
-
-    def render_ok(record, opts = {})
-      render opts.merge(status: :ok, json: record)
-    end
-
-    def render_no_content
-      head :no_content
-    end
   end
 end
