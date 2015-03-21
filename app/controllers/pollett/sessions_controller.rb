@@ -1,6 +1,6 @@
 module Pollett
   class SessionsController < ApplicationController
-    skip_before_filter :authenticate!, only: [:create, :forgot]
+    skip_authentication only: [:create, :forgot]
 
     def show
       render json: current_session, status: :ok

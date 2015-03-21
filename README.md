@@ -53,11 +53,11 @@ At minimum, you will need to configure `reset_url` so that the link will be corr
 
 ### Access Control
 
-Pollett authentication is opt-out rather than opt-in. This means that if there is an action that does not require authentication, you will need to use a `skip_before_filter`:
+Pollett authentication is opt-out rather than opt-in. This means that if there is an action that does not require authentication, you will need to use `skip_authentication`:
 
 ```ruby
 class ArticlesController < ApplicationController
-  skip_before_filter :authenticate!, only: :safe_action
+  skip_authentication only: :safe_action
 
   def safe_action
   	# something that does not require authentication

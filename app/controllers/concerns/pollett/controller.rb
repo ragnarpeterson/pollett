@@ -7,7 +7,13 @@ module Pollett
     included do
       attr_accessor :current_session
 
-      before_filter :authenticate!
+      before_action :authenticate!
+    end
+
+    module ClassMethods
+      def skip_authentication(options = {})
+        skip_before_action(:authenticate!, options)
+      end
     end
 
     private
