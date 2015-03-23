@@ -1,0 +1,5 @@
+require "pollett/concerns/controllers"
+require "pollett/concerns/mailers"
+require "pollett/concerns/models"
+require "pollett/concerns/serializers"
+require "pollett/concerns/services"

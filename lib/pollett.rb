@@ -1,6 +1,7 @@
 require "active_model_serializers"
 require "servitore"
 
+require "pollett/concerns"
 require "pollett/configuration"
 require "pollett/engine"
 
