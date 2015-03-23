@@ -15,7 +15,7 @@ module Pollett
         private
         def safe_params
           permitted = Pollett.config.whitelist | [:email, :password]
-          params.permit(*permitted)
+          _params.permit(*permitted)
         end
 
         def deliver_email(user)

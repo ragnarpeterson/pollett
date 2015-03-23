@@ -11,7 +11,7 @@ module Pollett
         end
 
         def call
-          user = service.call(params)
+          user = service.call(_params)
           user.sessions.create!
         end
 
