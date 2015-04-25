@@ -62,7 +62,7 @@ describe "Sessions" do
     end
 
     context "when registering" do
-      let(:params) { { name: "New User", email: "new@example.com", password: "password", method: "register" } }
+      let(:params) { { name: "New User", email: "new@example.com", password: "password" } }
 
       context "with valid params" do
         it "responds with new session" do
@@ -105,7 +105,7 @@ describe "Sessions" do
     context "when resetting password" do
       before { user.update!(reset_token: Pollett.generate_token) }
 
-      let(:params) { { token: user.reset_token, password: "password", method: "reset" } }
+      let(:params) { { token: user.reset_token, password: "password" } }
 
       context "with valid params" do
         it "responds with new session" do

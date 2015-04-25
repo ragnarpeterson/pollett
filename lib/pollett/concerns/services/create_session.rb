@@ -6,10 +6,6 @@ module Pollett
 
         include Servitore::Service
 
-        included do
-          param_reader :method
-        end
-
         def call
           user = service.call(_params)
           user.sessions.create!
@@ -17,10 +13,12 @@ module Pollett
 
         private
         def service
-          @service ||= case method
-          when "register" then Pollett::RegisterUser
-          when "reset" then Pollett::ChangePassword
-          else Pollett::AuthenticateUser
+          @service ||= if _params.key?(:name)
+            Pollett::RegisterUser
+          elsif _params.key?(:token)
+            Pollett::ChangePassword
+          else
+            Pollett::AuthenticateUser
           end
         end
       end
