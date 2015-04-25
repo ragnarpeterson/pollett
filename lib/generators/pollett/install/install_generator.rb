@@ -68,6 +68,7 @@ module Pollett
 
       def new_columns
         @new_columns ||= {
+          email: "t.string :name, null: false",
           email: "t.string :email, null: false",
           password_digest: "t.string :password_digest, null: false",
           reset_token: "t.string :reset_token"

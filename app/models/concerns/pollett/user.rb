@@ -11,6 +11,8 @@ module Pollett
 
       before_validation :normalize_email
 
+      validates :name, presence: true
+
       validates :email, presence: true,
                         uniqueness: true,
                         email: { strict_mode: true }

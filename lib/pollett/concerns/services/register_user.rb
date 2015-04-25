@@ -6,6 +6,8 @@ module Pollett
 
         include Servitore::Service
 
+        PERMITTED = [:name, :email, :password]
+
         def call
           Pollett.config.user_model.create!(safe_params).tap do |user|
             deliver_email(user) if Pollett.config.send_welcome_email
@@ -14,7 +16,7 @@ module Pollett
 
         private
         def safe_params
-          permitted = Pollett.config.whitelist | [:email, :password]
+          permitted = Pollett.config.whitelist | PERMITTED
           _params.permit(*permitted)
         end
 
