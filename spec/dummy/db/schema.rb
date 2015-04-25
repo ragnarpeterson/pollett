@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20150226030316) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "pollett_sessions", id: :uuid, default: "uuid_generate_v1()", force: :cascade do |t|
+  create_table "pollett_sessions", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid     "user_id",     null: false
     t.string   "token",       null: false
     t.datetime "revoked_at"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20150226030316) do
   add_index "pollett_sessions", ["token"], name: "index_pollett_sessions_on_token", unique: true, using: :btree
   add_index "pollett_sessions", ["user_id"], name: "index_pollett_sessions_on_user_id", using: :btree
 
-  create_table "users", id: :uuid, default: "uuid_generate_v1()", force: :cascade do |t|
+  create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name",            null: false
     t.string   "email",           null: false
     t.string   "password_digest", null: false
