@@ -5,7 +5,7 @@ module Pollett
         extend ActiveSupport::Concern
 
         def index
-          render json: scoped.active, status: :ok
+          render_list(scoped.active)
         end
 
         def create

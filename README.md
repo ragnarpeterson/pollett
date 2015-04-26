@@ -31,6 +31,8 @@ Then, just migrate the database:
 $ rake db:migrate
 ```
 
+Finally, you must implement the `render_list` method in your `ApplicationController`. Use this method to paginate a list of records any way you want.
+
 ## Configure
 
 Override any of these defaults in `config/initializers/pollett.rb`:
