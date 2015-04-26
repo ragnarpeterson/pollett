@@ -7,14 +7,12 @@ module Pollett
         included do
           belongs_to :user, class_name: Pollett.config.user_model_name
 
-          before_create :set_token
-
           scope :active, -> { where("((type = 'Pollett::Session' AND accessed_at >= ?) OR (type = 'Pollett::Key')) AND revoked_at IS NULL", Pollett.config.timeout.ago) }
         end
 
         module ClassMethods
-          def authenticate(token)
-            active.find_by(token: token)
+          def authenticate(id)
+            active.find_by(id: id)
           end
         end
 
@@ -37,11 +35,6 @@ module Pollett
         def revoke!
           self.revoked_at ||= current_time_from_proper_timezone
           save!
-        end
-
-        private
-        def set_token
-          self.token = Pollett.generate_token
         end
       end
     end

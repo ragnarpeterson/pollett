@@ -6,7 +6,6 @@ module Pollett
 
         included do
           attributes :id,
-                     :token,
                      :client,
                      :active,
                      :ip,

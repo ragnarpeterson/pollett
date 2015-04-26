@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 20150226030316) do
     t.string   "type",        null: false
     t.uuid     "user_id",     null: false
     t.string   "client",      null: false
-    t.string   "token",       null: false
     t.datetime "revoked_at"
     t.datetime "accessed_at"
     t.string   "ip"
@@ -32,7 +31,6 @@ ActiveRecord::Schema.define(version: 20150226030316) do
 
   add_index "pollett_contexts", ["accessed_at"], name: "index_pollett_contexts_on_accessed_at", using: :btree
   add_index "pollett_contexts", ["revoked_at"], name: "index_pollett_contexts_on_revoked_at", using: :btree
-  add_index "pollett_contexts", ["token"], name: "index_pollett_contexts_on_token", unique: true, using: :btree
   add_index "pollett_contexts", ["user_id"], name: "index_pollett_contexts_on_user_id", using: :btree
 
   create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|

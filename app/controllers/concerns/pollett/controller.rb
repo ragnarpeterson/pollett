@@ -27,7 +27,7 @@ module Pollett
     end
 
     def authenticate!
-      if context = authenticate_with_http_token { |t, _| Context.authenticate(t) }
+      if context = authenticate_with_http_token { |id, _| Context.authenticate(id) }
         activate_context(context)
       else
         raise Unauthorized

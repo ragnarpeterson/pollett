@@ -65,7 +65,7 @@ module Pollett
         end
 
         def auth_header_for(context)
-          { "HTTP_AUTHORIZATION" => ActionController::HttpAuthentication::Token.encode_credentials(context.token) }
+          { "HTTP_AUTHORIZATION" => ActionController::HttpAuthentication::Token.encode_credentials(context.id) }
         end
       end
 
