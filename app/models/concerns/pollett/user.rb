@@ -7,7 +7,9 @@ module Pollett
     included do
       has_secure_password
 
+      has_many :contexts, class_name: "Pollett::Context"
       has_many :sessions, class_name: "Pollett::Session"
+      has_many :keys, class_name: "Pollett::Key"
 
       before_validation :normalize_email
 

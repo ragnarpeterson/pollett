@@ -1,1 +1,1 @@
-require "pollett/concerns/serializers/session_serializer"
+require "pollett/concerns/serializers/context_serializer"

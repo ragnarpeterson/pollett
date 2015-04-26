@@ -17,8 +17,10 @@ ActiveRecord::Schema.define(version: 20150226030316) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "pollett_sessions", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+  create_table "pollett_contexts", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "type",        null: false
     t.uuid     "user_id",     null: false
+    t.string   "client",      null: false
     t.string   "token",       null: false
     t.datetime "revoked_at"
     t.datetime "accessed_at"
@@ -28,10 +30,10 @@ ActiveRecord::Schema.define(version: 20150226030316) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "pollett_sessions", ["accessed_at"], name: "index_pollett_sessions_on_accessed_at", using: :btree
-  add_index "pollett_sessions", ["revoked_at"], name: "index_pollett_sessions_on_revoked_at", using: :btree
-  add_index "pollett_sessions", ["token"], name: "index_pollett_sessions_on_token", unique: true, using: :btree
-  add_index "pollett_sessions", ["user_id"], name: "index_pollett_sessions_on_user_id", using: :btree
+  add_index "pollett_contexts", ["accessed_at"], name: "index_pollett_contexts_on_accessed_at", using: :btree
+  add_index "pollett_contexts", ["revoked_at"], name: "index_pollett_contexts_on_revoked_at", using: :btree
+  add_index "pollett_contexts", ["token"], name: "index_pollett_contexts_on_token", unique: true, using: :btree
+  add_index "pollett_contexts", ["user_id"], name: "index_pollett_contexts_on_user_id", using: :btree
 
   create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name",            null: false
@@ -45,5 +47,5 @@ ActiveRecord::Schema.define(version: 20150226030316) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_token"], name: "index_users_on_reset_token", unique: true, using: :btree
 
-  add_foreign_key "pollett_sessions", "users", on_delete: :cascade
+  add_foreign_key "pollett_contexts", "users", on_delete: :cascade
 end

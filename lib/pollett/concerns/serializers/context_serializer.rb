@@ -1,12 +1,14 @@
 module Pollett
   module Concerns
     module Serializers
-      module SessionSerializer
+      module ContextSerializer
         extend ActiveSupport::Concern
 
         included do
           attributes :id,
                      :token,
+                     :client,
+                     :active,
                      :ip,
                      :user_agent,
                      :accessed_at,

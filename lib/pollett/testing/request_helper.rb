@@ -26,28 +26,28 @@ module Pollett
           keys.each { |k| expect(hash).to have_key(k) }
         end
 
-        def a_head(path, session, params = nil)
-          authenticated_request(:head, path, session, params)
+        def a_head(path, context, params = nil)
+          authenticated_request(:head, path, context, params)
         end
 
-        def a_get(path, session, params = nil)
-          authenticated_request(:get, path, session, params)
+        def a_get(path, context, params = nil)
+          authenticated_request(:get, path, context, params)
         end
 
-        def a_post(path, session, params = nil)
-          authenticated_request(:post, path, session, params)
+        def a_post(path, context, params = nil)
+          authenticated_request(:post, path, context, params)
         end
 
-        def a_put(path, session, params = nil)
-          authenticated_request(:put, path, session, params)
+        def a_put(path, context, params = nil)
+          authenticated_request(:put, path, context, params)
         end
 
-        def a_delete(path, session, params = nil)
-          authenticated_request(:delete, path, session, params)
+        def a_delete(path, context, params = nil)
+          authenticated_request(:delete, path, context, params)
         end
 
-        def authenticated_request(method, path, session, params)
-          json_request(method, path, params, auth_header_for(session))
+        def authenticated_request(method, path, context, params)
+          json_request(method, path, params, auth_header_for(context))
         end
 
         def json_request(method, path, params = nil, headers = {})
@@ -64,8 +64,8 @@ module Pollett
           end
         end
 
-        def auth_header_for(session)
-          { "HTTP_AUTHORIZATION" => ActionController::HttpAuthentication::Token.encode_credentials(session.token) }
+        def auth_header_for(context)
+          { "HTTP_AUTHORIZATION" => ActionController::HttpAuthentication::Token.encode_credentials(context.token) }
         end
       end
 

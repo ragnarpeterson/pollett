@@ -7,5 +7,7 @@ Pollett::Engine.routes.draw do
         post "forgot"
       end
     end
+
+    resources :keys, except: [:new, :edit, :update]
   end
 end

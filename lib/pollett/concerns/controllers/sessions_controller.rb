@@ -9,12 +9,12 @@ module Pollett
         end
 
         def show
-          render json: current_session, status: :ok
+          render json: current_context, status: :ok
         end
 
         def create
           record = CreateSession.call(params)
-          activate_session(record)
+          activate_context(record)
           render json: record, status: :created
         end
 
@@ -24,7 +24,7 @@ module Pollett
         end
 
         def destroy
-          current_session.revoke!
+          current_context.revoke!
           head :no_content
         end
       end

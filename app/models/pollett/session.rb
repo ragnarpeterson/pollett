@@ -1,5 +1,5 @@
 module Pollett
-  class Session < ActiveRecord::Base
+  class Session < Context
     include Concerns::Models::Session
   end
 end

@@ -5,7 +5,7 @@ module Pollett
     include ActionController::HttpAuthentication::Token::ControllerMethods
 
     included do
-      attr_accessor :current_session
+      attr_accessor :current_context
 
       before_action :authenticate!
     end
@@ -17,18 +17,18 @@ module Pollett
     end
 
     private
-    def activate_session(session)
-      session.access(request)
-      self.current_session = session
+    def activate_context(context)
+      context.access(request)
+      self.current_context = context
     end
 
     def current_user
-      current_session.try(:user)
+      current_context.try(:user)
     end
 
     def authenticate!
-      if session = authenticate_with_http_token { |t, _| Session.authenticate(t) }
-        activate_session(session)
+      if context = authenticate_with_http_token { |t, _| Context.authenticate(t) }
+        activate_context(context)
       else
         raise Unauthorized
       end
