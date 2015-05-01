@@ -5,11 +5,11 @@ module Pollett
         extend ActiveSupport::Concern
 
         def index
-          render_list(scoped.active)
+          render_list(scoped)
         end
 
         def create
-          key = scoped.create!(safe_params)
+          key = current_user.keys.create!(safe_params)
           render json: key, status: :created
         end
 
@@ -29,7 +29,7 @@ module Pollett
         end
 
         def scoped
-          current_user.keys
+          current_user.keys.active
         end
       end
     end
