@@ -8,14 +8,19 @@ module Pollett
           skip_authentication only: [:create, :forgot]
         end
 
+        def index
+          render_list(scoped)
+        end
+
         def show
-          render json: current_context, status: :ok
+          session = scoped.find(params[:id])
+          render json: session, status: :ok
         end
 
         def create
-          record = CreateSession.call(params)
-          activate_context(record)
-          render json: record, status: :created
+          session = CreateSession.call(params)
+          activate_context(session)
+          render json: session, status: :created
         end
 
         def forgot
@@ -24,8 +29,13 @@ module Pollett
         end
 
         def destroy
-          current_context.revoke!
+          scoped.find(params[:id]).revoke!
           head :no_content
+        end
+
+        private
+        def scoped
+          current_user.sessions.active
         end
       end
     end

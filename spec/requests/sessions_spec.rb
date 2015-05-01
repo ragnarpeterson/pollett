@@ -4,36 +4,27 @@ describe "Sessions" do
   let!(:user) { create(:user, email: "john@example.com", password: "password") }
   let!(:session) { create(:pollett_session, user: user) }
 
-  describe "GET /sessions/current" do
-    it_requires_authentication(:get, "/sessions/current")
+  describe "GET /sessions" do
+    let!(:inactive) { create(:pollett_session, user: user, revoked_at: 1.day.ago) }
 
-    context "when session is active" do
-      it "responds with the current session" do
-        a_get("/sessions/current", session)
+    it_requires_authentication(:get, "/sessions")
 
-        expect(json[:session][:id]).to eq(session.id)
-        expect_status(200)
-      end
+    it "responds with all active sessions" do
+      a_get("/sessions", session)
+
+      expect(json[:sessions].map { |s| s[:id] }).to eq([session.id])
+      expect_status(200)
     end
+  end
 
-    context "when session has been revoked" do
-      before { session.revoke! }
+  describe "GET /sessions/:id" do
+    it_requires_authentication(:get, "/sessions/1")
 
-      it "raises an unauthorized error" do
-        expect do
-          a_get("/sessions/current", session)
-        end.to raise_error(Pollett::Unauthorized)
-      end
-    end
+    it "responds with the specified session" do
+      a_get("/sessions/#{session.id}", session)
 
-    context "when session has timed out" do
-      before { session.update!(accessed_at: 3.weeks.ago) }
-
-      it "raises an unauthorized error" do
-        expect do
-          a_get("/sessions/current", session)
-        end.to raise_error(Pollett::Unauthorized)
-      end
+      expect(json[:session][:id]).to eq(session.id)
+      expect_status(200)
     end
   end
 
@@ -174,11 +165,11 @@ describe "Sessions" do
     end
   end
 
-  describe "DELETE /sessions/current" do
-    it_requires_authentication(:delete, "/sessions/current")
+  describe "DELETE /sessions/:id" do
+    it_requires_authentication(:delete, "/sessions/1")
 
     it "responds with nothing" do
-      a_delete("/sessions/current", session)
+      a_delete("/sessions/#{session.id}", session)
 
       expect_status(204)
     end
