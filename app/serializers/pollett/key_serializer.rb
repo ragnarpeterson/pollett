@@ -1,4 +1,5 @@
 module Pollett
-  class KeySerializer < ContextSerializer
+  class KeySerializer < ActiveModel::Serializer
+    include Concerns::Serializers::ContextSerializer
   end
 end

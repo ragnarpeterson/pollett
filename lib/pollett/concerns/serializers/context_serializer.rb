@@ -6,6 +6,7 @@ module Pollett
 
         included do
           attributes :id,
+                     :type,
                      :client,
                      :active,
                      :ip,
@@ -14,7 +15,7 @@ module Pollett
                      :created_at,
                      :updated_at
 
-          has_one :user
+          belongs_to :user
         end
       end
     end

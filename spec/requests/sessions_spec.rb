@@ -12,7 +12,7 @@ describe "Sessions" do
     it "responds with all active sessions" do
       a_get("/sessions", session)
 
-      expect(json[:sessions].map { |s| s[:id] }).to eq([session.id])
+      expect(data.map { |s| s[:id] }).to eq([session.id])
       expect_status(200)
     end
   end
@@ -23,7 +23,7 @@ describe "Sessions" do
     it "responds with the specified session" do
       a_get("/sessions/#{session.id}", session)
 
-      expect(json[:session][:id]).to eq(session.id)
+      expect(data[:id]).to eq(session.id)
       expect_status(200)
     end
   end
@@ -36,7 +36,7 @@ describe "Sessions" do
         it "responds with new session" do
           json_request(:post, "/sessions", params)
 
-          expect(json[:session][:user][:id]).to eq(user.id)
+          expect(data[:links][:user][:linkage][:id]).to eq(user.id)
           expect_status(201)
         end
       end
@@ -59,8 +59,7 @@ describe "Sessions" do
         it "responds with new session" do
           json_request(:post, "/sessions", params)
 
-          expect(json[:session][:user][:name]).to eq("New User")
-          expect(json[:session][:user][:email]).to eq("new@example.com")
+          expect(data[:links][:user][:linkage][:id]).to be_a(String)
           expect_status(201)
         end
 
@@ -102,7 +101,7 @@ describe "Sessions" do
         it "responds with new session" do
           json_request(:post, "/sessions", params)
 
-          expect(json[:session][:user][:id]).to eq(user.id)
+          expect(data[:links][:user][:linkage][:id]).to eq(user.id)
           expect_status(201)
         end
       end

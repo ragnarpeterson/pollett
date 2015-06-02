@@ -13,7 +13,7 @@ describe "Keys" do
     it "responds with all active keys" do
       a_get("/keys", session)
 
-      expect(json[:keys].map { |k| k[:id] }).to eq([active.id])
+      expect(data.map { |k| k[:id] }).to eq([active.id])
       expect_status(200)
     end
   end
@@ -27,8 +27,8 @@ describe "Keys" do
       it "responds with new key" do
         a_post("/keys", session, params)
 
-        expect(json[:key][:user][:id]).to eq(user.id)
-        expect(json[:key][:client]).to eq("fake")
+        expect(data[:links][:user][:linkage][:id]).to eq(user.id)
+        expect(data[:client]).to eq("fake")
         expect_status(201)
       end
     end
@@ -50,7 +50,7 @@ describe "Keys" do
     it "responds with the specified key" do
       a_get("/keys/#{active.id}", session)
 
-      expect(json[:key][:id]).to eq(active.id)
+      expect(data[:id]).to eq(active.id)
       expect_status(200)
     end
   end

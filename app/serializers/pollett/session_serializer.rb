@@ -1,4 +1,5 @@
 module Pollett
-  class SessionSerializer < ContextSerializer
+  class SessionSerializer < ActiveModel::Serializer
+    include Concerns::Serializers::ContextSerializer
   end
 end

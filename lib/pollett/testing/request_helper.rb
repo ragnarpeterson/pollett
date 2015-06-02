@@ -18,6 +18,18 @@ module Pollett
           @json ||= JSON.parse(response.body, symbolize_names: true)
         end
 
+        def data
+          @data ||= json[:data]
+        end
+
+        def errors
+          @errors ||= json[:errors]
+        end
+
+        def meta
+          @meta ||= json[:meta]
+        end
+
         def expect_status(status)
           expect(response.status).to eq(status)
         end
