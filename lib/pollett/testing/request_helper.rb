@@ -50,6 +50,10 @@ module Pollett
           authenticated_request(:post, path, context, params)
         end
 
+        def a_patch(path, context, params = nil)
+          authenticated_request(:patch, path, context, params)
+        end
+
         def a_put(path, context, params = nil)
           authenticated_request(:put, path, context, params)
         end
@@ -69,7 +73,7 @@ module Pollett
         end
 
         def params_for(method, params)
-          if [:post, :put].include?(method) && params
+          if [:post, :patch, :put].include?(method) && params
             JSON.generate(params)
           else
             params
