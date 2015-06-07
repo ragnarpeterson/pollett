@@ -20,7 +20,7 @@ module Pollett
 
         private
         def safe_params
-          params.permit(:name, :email)
+          params.permit(:name, :email, :password)
         end
       end
     end
