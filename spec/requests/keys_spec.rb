@@ -27,8 +27,8 @@ describe "Keys" do
       it "responds with new key" do
         a_post("/keys", session, params)
 
-        expect(data[:links][:user][:linkage][:id]).to eq(user.id)
-        expect(data[:client]).to eq("fake")
+        expect(data[:relationships][:user][:data][:id]).to eq(user.id)
+        expect(data[:attributes][:client]).to eq("fake")
         expect_status(201)
       end
     end

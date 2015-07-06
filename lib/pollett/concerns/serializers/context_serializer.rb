@@ -5,9 +5,7 @@ module Pollett
         extend ActiveSupport::Concern
 
         included do
-          attributes :id,
-                     :type,
-                     :client,
+          attributes :client,
                      :active,
                      :ip,
                      :user_agent,

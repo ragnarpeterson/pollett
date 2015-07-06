@@ -24,7 +24,7 @@ describe "User" do
       a_patch("/user", session, params)
 
       expect(data[:id]).to eq(user.id)
-      expect(data[:email]).to eq(params[:email])
+      expect(data[:attributes][:email]).to eq(params[:email])
       expect_status(200)
     end
   end

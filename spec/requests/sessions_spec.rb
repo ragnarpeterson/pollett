@@ -36,7 +36,7 @@ describe "Sessions" do
         it "responds with new session" do
           json_request(:post, "/sessions", params)
 
-          expect(data[:links][:user][:linkage][:id]).to eq(user.id)
+          expect(data[:relationships][:user][:data][:id]).to eq(user.id)
           expect_status(201)
         end
       end
@@ -59,7 +59,7 @@ describe "Sessions" do
         it "responds with new session" do
           json_request(:post, "/sessions", params)
 
-          expect(data[:links][:user][:linkage][:id]).to be_a(String)
+          expect(data[:relationships][:user][:data][:id]).to be_a(String)
           expect_status(201)
         end
 
@@ -101,7 +101,7 @@ describe "Sessions" do
         it "responds with new session" do
           json_request(:post, "/sessions", params)
 
-          expect(data[:links][:user][:linkage][:id]).to eq(user.id)
+          expect(data[:relationships][:user][:data][:id]).to eq(user.id)
           expect_status(201)
         end
       end

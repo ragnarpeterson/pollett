@@ -30,6 +30,18 @@ module Pollett
           @meta ||= json[:meta]
         end
 
+        def jsonapi
+          @jsonapi ||= json[:jsonapi]
+        end
+
+        def links
+          @links ||= json[:links]
+        end
+
+        def included
+          @included ||= json[:included]
+        end
+
         def expect_status(status)
           expect(response.status).to eq(status)
         end

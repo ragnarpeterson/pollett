@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency "rails", "~> 4.2.0"
-  s.add_dependency "active_model_serializers", "0.10.0.rc1"
+  s.add_dependency "active_model_serializers", "0.10.0.rc2"
   s.add_dependency "bcrypt"
   s.add_dependency "email_validator"
   s.add_dependency "pg"
